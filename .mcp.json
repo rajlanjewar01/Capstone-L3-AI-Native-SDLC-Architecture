@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "kestrel-warehouse-leeds": {
+      "command": "python",
+      "args": ["-m", "kestrel_ops"],
+      "env": { "KESTREL_SITE": "LEEDS-01" }
+    }
+  }
+}

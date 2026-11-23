@@ -21,3 +21,6 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 pythonpath = ["src"]
 testpaths = ["tests"]
+
+[project.scripts]
+kestrel-ops = "kestrel_ops.__main__:main"

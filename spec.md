@@ -255,6 +255,8 @@ Errors: `EXCEPTION_NOT_FOUND`, `ALREADY_OPEN`.
 | `CONFIRMATION_INVALID` | Unknown, used, or other-site token | false | Run the `prepare_*` step again |
 | `CONFIRMATION_EXPIRED` | Older than 5 min | false | Run `prepare_*` again |
 | `CONFIRMATION_STALE` | Record changed since preview | false | Run `prepare_*` again; shows what changed |
+| `SLOT_NOT_FOUND` | Slot time missing from a scheduled date (unreachable with the provided data; kept so a bad schedule fails clearly) | false | Valid slots listed |
+| `UNKNOWN_TOOL` | Tool name not in the catalogue | false | `valid_values` lists tool names |
 | `INTERNAL_ERROR` | Unexpected fault | true | "Retry once; if it persists report to IT with `error_id`" (no trace) |
 
 ---
@@ -266,3 +268,28 @@ Errors: `EXCEPTION_NOT_FOUND`, `ALREADY_OPEN`.
 3. "Large change" threshold of 50% is a starting value.
 4. Bin ownership by prefix (A/B/C/YARD) is inferred from E7; the real bin master list was not supplied.
 5. The warehouse systems are stubbed over the two data files; state is in memory for the life of the process.
+
+---
+
+## 7. Implementation notes (added after the build, commit `05-spec-sync`)
+
+These are things learned while building. None changes a tool's name, parameters or behaviour
+from sections 2-5; they document detail the spec left open.
+
+1. **Extra error fields.** Some errors carry additional machine-readable fields beside the
+   standard ones: `booked_by` (`SLOT_ALREADY_BOOKED`), `available_dates` (`DATE_NOT_SCHEDULED`),
+   `existing_exception_id` (`DUPLICATE_OPEN_EXCEPTION`), `error_id` (`INTERNAL_ERROR`).
+2. **Strict types.** Parameters are validated strictly: `"12"` is not accepted for an integer and
+   `1` is not accepted for a boolean, so an agent that sends the wrong type gets a `problems[]`
+   entry instead of silent coercion.
+3. **Search filler words.** `search_products` ignores a small set of filler words ("how many",
+   "do we have", "in stock", ...) so a pasted question still works, but the tool description tells
+   the agent to pass only product words.
+4. **Bin validation is derived from the data** (E7): the allowed prefixes for a site are the prefixes
+   its own stock already uses (`A`; `B`; `C`; `YARD` at Leeds). It is a format check, not a master
+   bin list, because no master list was supplied.
+5. **Token store lives with the warehouse backend**, not the per-site session, so "a token issued to
+   one site is rejected at another and is not consumed by the attempt" is a testable property.
+6. **A found defect in my own error text** (caught by the test suite, not by review): the first
+   `ALREADY_OPEN` hint was "Nothing to do." That is not enough to act on; it now says why and what
+   the next tool would be.
