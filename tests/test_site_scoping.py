@@ -1,6 +1,7 @@
 """Site scoping is enforced inside the toolkit. Same-site access must work; cross-site must be refused."""
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -141,5 +142,7 @@ def test_server_refuses_to_start_without_a_valid_site():
 def test_the_stdio_entry_point_exits_non_zero_without_a_site():
     root = Path(__file__).resolve().parents[1]
     env = {"PATH": "/usr/bin:/bin", "PYTHONPATH": str(root / "src")}
+    if "SYSTEMROOT" in os.environ:  # Windows needs this for asyncio/sockets to load
+        env["SYSTEMROOT"] = os.environ["SYSTEMROOT"]
     proc = subprocess.run([sys.executable, "-m", "kestrel_ops"], env=env, capture_output=True, text=True, timeout=30)
     assert proc.returncode != 0 and "KESTREL_SITE" in proc.stderr

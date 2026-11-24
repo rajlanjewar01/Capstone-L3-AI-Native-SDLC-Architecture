@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "kestrel-warehouse-leeds": {
-      "command": "python",
+      "command": ".venv\\Scripts\\python.exe",
       "args": ["-m", "kestrel_ops"],
       "env": { "KESTREL_SITE": "LEEDS-01" }
     }

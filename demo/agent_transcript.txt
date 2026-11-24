@@ -1,0 +1,82 @@
+ ▐▛███▛█   Claude Code v2.1.330
+▝▜██████▀  Opus 4.6 · API Usage Billing
+ ▝▝   ▝▝   ~\Downloads\kestrel-warehouse-mcp\kestrel-warehouse-mcp
+
+
+‼ Both ANTHROPIC_AUTH_TOKEN and /login managed key set · auth may not work as expected
+  · to use ANTHROPIC_AUTH_TOKEN: claude /logout
+  · to use /login managed key: Unset the ANTHROPIC_AUTH_TOKEN environment variable.
+
+> How many pallet wrap have we got?                                             
+
+  Called kestrel-warehouse-leeds (ctrl+o to expand)
+
+● We've got two types of pallet wrap in stock:
+
+  - Pallet wrap 500mm clear — 240 each (bin A-12-3)
+  - Pallet wrap 500mm black — 180 each (bin A-12-4)
+
+  420 in total across both.
+
+✻ Baked for 8s · done 12:59 PM
+
+> Any void fill in stock?                                                       
+
+  Called kestrel-warehouse-leeds (ctrl+o to expand)
+
+● Void fill, air pillow — 420 boxes in stock (bin A-19-6).
+
+✻ Baked for 4s · done 1:00 PM
+
+> Book the 08:00 dock on 2026-04-08 for Acme Ltd                                
+
+  Called kestrel-warehouse-leeds · 1 failed (ctrl+o to expand)
+
+● The 08:00 slot on 2026-04-08 is already booked by Northbound Freight.
+
+  The free slots that day are: 06:00, 10:00, 14:00, and 16:00. Which one would
+  you like for Acme Ltd?
+
+✻ Sautéed for 4s · done 1:00 PM
+
+> he black pallet wrap count is wrong, I counted 150                            
+
+  Called kestrel-warehouse-leeds (ctrl+o to expand)
+
+● Here's the adjustment preview:
+
+  - Pallet wrap 500mm black (SKU-8802)
+  - Current: 180 each → New: 150 each (−30)
+  - Reason: Recount
+
+  This feeds into the month-end count and can't be undone. Shall I go ahead?
+
+✻ Crunched for 5s · done 1:01 PM
+
+> yes                                                                           
+
+  Called kestrel-warehouse-leeds (ctrl+o to expand)
+
+● Done. Black pallet wrap (SKU-8802) has been adjusted from 180 to 150 each. The
+  correction is on the ledger (LED-0001).
+
+✻ Worked for 4s · done 1:01 PM
+
+> What's the stock of 75mm corner protector at Reading?                         
+
+  Thought for 1s (ctrl+o to expand)
+
+● I can only check stock at our site, LEEDS-01. I don't have access to Reading's
+  inventory. You'd need to check with the Reading team directly for that one.
+
+  Want me to look up 75mm corner protectors here at Leeds instead?
+
+✻ Brewed for 2s · done 1:01 PM
+
+> Book the 25:00 dock on 2026-04-08 for Acme Ltd                                
+
+● That's not a valid time slot. The available dock slots are 06:00, 08:00,
+  10:00, 12:00, 14:00, and 16:00. Which one would you like for Acme Ltd on
+  2026-04-08?
+
+✻ Churned for 2s · done 1:02 PM
